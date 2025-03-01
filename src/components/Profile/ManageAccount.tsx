@@ -1,25 +1,18 @@
+import { Button } from "@/components/ui/button";
 import {
   Dialog,
-  DialogTrigger,
   DialogContent,
+  DialogDescription,
   DialogHeader,
   DialogTitle,
-  DialogDescription,
+  DialogTrigger,
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Button } from "@/components/ui/button";
-import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { Settings } from "lucide-react";
+import Aavtar from "./Aavtar";
 
 const ManageAccount = () => {
-  const userData = {
-    name: "Md Tofaal Ahmed",
-    email: "tofaal91522@gmail.com",
-    address: "123, Rajshahi, Bangladesh",
-    avatar: "https://github.com/shadcn.png",
-  };
-
   return (
     <Dialog>
       <DialogTrigger>
@@ -41,10 +34,8 @@ const ManageAccount = () => {
 
         {/* Avatar Upload */}
         <div className="flex flex-col items-center gap-3">
-          <Avatar className="w-20 h-20 border">
-            <AvatarImage src={userData.avatar} />
-            <AvatarFallback>U</AvatarFallback>
-          </Avatar>
+          <Aavtar className="w-20 h-20 border" />
+
           <input
             type="file"
             accept="image/*"

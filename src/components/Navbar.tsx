@@ -23,7 +23,7 @@ const Navbar = () => {
       <div className="container mx-auto flex items-center justify-between lg:px-8">
         {/* Logo */}
         <Link href="/" className="font-bold text-2xl cursor-pointer">
-          BlogApp
+          Otp
         </Link>
 
         {/* Desktop Nav Items */}
