@@ -9,7 +9,7 @@ import Aavtar from "./Aavtar";
 const Profile = () => {
   return (
     <Popover>
-      <PopoverTrigger className="hidden md:flex">
+      <PopoverTrigger >
         <Aavtar className="w-8 h-8" />
       </PopoverTrigger>
       <PopoverContent>
