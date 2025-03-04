@@ -1,8 +1,12 @@
+
 import Link from "next/link";
 import { Button } from "../ui/button";
 import Image from "next/image";
 
 const Hero = () => {
+  if (typeof window !== "undefined") {
+    localStorage.getItem("user")
+  }
   return (
     <div className="relative isolate overflow-hidden bg-white dark:bg-gray-900 transition-colors">
       <div className="absolute inset-0 -z-10 bg-[radial-gradient(45rem_50rem_at_top,var(--color-indigo-100),white)] opacity-20 dark:bg-[radial-gradient(45rem_50rem_at_top,var(--color-indigo-800),white)]"></div>

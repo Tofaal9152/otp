@@ -5,7 +5,7 @@ import axios from "axios";
 
 const LoginSchema = z.object({
   email: z.string().email("please enter a valid email"),
-  password: z.string().min(1, "password must be at least 1 characters"),
+  password: z.string().min(0, "please enter a valid password"),
 });
 type LoginType = {
   errors: {
@@ -29,12 +29,10 @@ export const LoginAction = async (
       errors: result.error.flatten().fieldErrors,
     };
   }
-  // Api call
-  console.log(`${process.env.NEXT_PUBLIC_BACKEND_URL}/auth/login`);
 
   try {
     const res = await axios.post(
-      `${process.env.NEXT_PUBLIC_BACKEND_URL}/auth/login`,
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}/rest-auth/login/`,
       {
         email: formData.get("email"),
         password: formData.get("password"),
@@ -43,6 +41,7 @@ export const LoginAction = async (
         withCredentials: true,
       }
     );
+
     console.log(res.data);
   } catch (error) {
     if (error instanceof Error) {
