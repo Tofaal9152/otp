@@ -14,7 +14,7 @@ const initialTokens = [
   {
     id: 1,
     name: "My Inbox Token",
-    createdBy: "Md Tofaal Ahmed",
+    createdBy: "John Doe",
     access: "Inbox Admin",
     token: "********b646",
     fullToken: "1726857760b646",
@@ -22,7 +22,7 @@ const initialTokens = [
   {
     id: 2,
     name: "Demo Mailtrap Token",
-    createdBy: "Md Tofaal Ahmed",
+    createdBy: "John Doe",
     access: "Domain Admin",
     token: "********bc6d",
     fullToken: "1726857761bc6d",
@@ -43,7 +43,6 @@ const AllSmsList = () => {
             <TableHead>Created By</TableHead>
             <TableHead>Access</TableHead>
             <TableHead className="text-center">Token</TableHead>
-            <TableHead className="text-right">Actions</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -53,7 +52,6 @@ const AllSmsList = () => {
               <TableCell>{token.createdBy}</TableCell>
               <TableCell>{token.access}</TableCell>
               <TableCell className="text-center">{token.token}</TableCell>
-              <TableCell className="text-right space-x-2">asd</TableCell>
             </TableRow>
           ))}
         </TableBody>

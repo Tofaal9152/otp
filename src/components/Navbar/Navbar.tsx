@@ -5,6 +5,7 @@ import MobileNavbar from "./MobileNavar";
 
 const navItems = [
   { name: "Home", link: "/" },
+  { name: "Api Documentation", link: "/documentation" },
   { name: "Dahsboard", link: "/dashboard" },
 ];
 
@@ -16,15 +17,21 @@ const Navbar = () => {
       <div className="container mx-auto flex items-center justify-between lg:px-8">
         {/* Logo */}
         <MobileNavbar navItems={navItems} />
-        <Link href="/" className="font-bold text-2xl cursor-pointer">
-          Sms service
+        <Link
+          href="/"
+          className="font-bold text-3xl cursor-pointer bg-gradient-to-r transition-all duration-300"
+        >
+          Cloud Sms BD
         </Link>
 
         {/* Desktop Nav Items */}
         <ul className="hidden md:flex space-x-6">
           {navItems.map((item, index) => (
             <li key={index}>
-              <Link href={item.link} className="hover:underline truncate font-semibold">
+              <Link
+                href={item.link}
+                className="hover:underline truncate font-semibold"
+              >
                 {item.name}
               </Link>
             </li>

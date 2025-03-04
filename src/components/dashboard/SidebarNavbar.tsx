@@ -1,17 +1,15 @@
 "use client";
 
-import { usePathname } from "next/navigation";
-import Link from "next/link";
 import {
   Breadcrumb,
   BreadcrumbItem,
-  BreadcrumbLink,
   BreadcrumbList,
   BreadcrumbPage,
-  BreadcrumbSeparator,
+  BreadcrumbSeparator
 } from "@/components/ui/breadcrumb";
 import { Separator } from "@/components/ui/separator";
 import { SidebarTrigger } from "@/components/ui/sidebar";
+import { usePathname } from "next/navigation";
 
 const SidebarNavbar = () => {
   const pathname = usePathname();
@@ -25,7 +23,7 @@ const SidebarNavbar = () => {
         <Breadcrumb>
           <BreadcrumbList>
             {pathSegments.map((segment, index) => {
-              const href = "/" + pathSegments.slice(0, index + 1).join("/");
+              // const href = "/" + pathSegments.slice(0, index + 1).join("/");
 
               return (
                 <BreadcrumbItem key={index}>
@@ -35,9 +33,8 @@ const SidebarNavbar = () => {
                     </BreadcrumbPage>
                   ) : (
                     <>
-                      <BreadcrumbLink asChild>
-                        <Link href={href}>{decodeURIComponent(segment)}</Link>
-                      </BreadcrumbLink>
+                      <p>{decodeURIComponent(segment)}</p>
+
                       <BreadcrumbSeparator />
                     </>
                   )}

@@ -1,9 +1,10 @@
-const Page = () => {
+const GetStartedPage = () => {
   return (
     <div className="container mx-auto max-w-4xl py-10 p-6">
       <h1 className="text-4xl font-bold">API Guide</h1>
       <p className="mt-4 text-lg text-gray-600 dark:text-slate-400">
-        This API allows you to send and verify OTPs securely. Below are the endpoints, request payloads, and expected responses.
+        This API allows you to send and verify OTPs securely. Below are the
+        endpoints, request payloads, and expected responses.
       </p>
 
       {/* Send OTP Section */}
@@ -86,4 +87,4 @@ const Page = () => {
   );
 };
 
-export default Page;
+export default GetStartedPage;
