@@ -1,6 +1,11 @@
 "use client";
 
-import { BookOpen, KeyRound, LayoutDashboard } from "lucide-react";
+import {
+  BookOpen,
+  KeyRound,
+  LayoutDashboard,
+  MessageSquareMore,
+} from "lucide-react";
 import * as React from "react";
 
 import { AppSidebarContent } from "@/components/dashboard/AppSidebar/AppSidebarContent";
@@ -15,7 +20,28 @@ import {
 
 import { AppSidebarFooter } from "./AppSidebarFooter";
 import { AppSidebarHeader } from "./AppSidebarHeader";
+import { OtpAndSmsService } from "./AppSidebarSmsOrOtp";
 
+export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+  return (
+    <Sidebar collapsible="icon" {...props}>
+      {/* Header */}
+      <SidebarHeader>
+        <AppSidebarHeader />
+      </SidebarHeader>
+      {/* Content */}
+      <SidebarContent>
+        <AppSidebarContent items={data.navMain} />
+        <OtpAndSmsService projects={data.projects} />
+      </SidebarContent>
+      {/* Footer */}
+      <SidebarFooter>
+        <AppSidebarFooter />
+      </SidebarFooter>
+      <SidebarRail />
+    </Sidebar>
+  );
+}
 const data = {
   navMain: [
     {
@@ -27,17 +53,6 @@ const data = {
         {
           title: "Analytics",
           url: "/dashboard",
-        },
-      ],
-    },
-    {
-      title: "API Settings",
-      url: "#",
-      icon: KeyRound,
-      items: [
-        {
-          title: "API Tokens",
-          url: "/dashboard/api-settings/api-tokens",
         },
       ],
     },
@@ -58,24 +73,16 @@ const data = {
       ],
     },
   ],
+  projects: [
+    {
+      name: "Send Msg or Otp",
+      url: "/dashboard/SendSms",
+      icon: MessageSquareMore,
+    },
+    {
+      name: "Api Token",
+      url: "/dashboard/api-tokens",
+      icon: KeyRound,
+    },
+  ],
 };
-
-export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
-  return (
-    <Sidebar collapsible="icon" {...props}>
-      {/* Header */}
-      <SidebarHeader>
-        <AppSidebarHeader />
-      </SidebarHeader>
-      {/* Content */}
-      <SidebarContent>
-        <AppSidebarContent items={data.navMain} />
-      </SidebarContent>
-      {/* Footer */}
-      <SidebarFooter>
-        <AppSidebarFooter />
-      </SidebarFooter>
-      <SidebarRail />
-    </Sidebar>
-  );
-}

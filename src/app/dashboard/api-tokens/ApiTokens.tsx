@@ -1,5 +1,5 @@
-import GenerateApiKey from "@/components/dashboard/api-settings/GenerateApiKey";
-import TokensDataTable from "@/components/dashboard/api-settings/TokensDataTable";
+import GenerateApiKey from "@/components/dashboard/api-tokens/GenerateApiKey";
+import TokensDataTable from "@/components/dashboard/api-tokens/TokensDataTable";
 const ApiTokens = () => {
   return (
     <div className="container mx-auto max-w-4xl py-10 p-6">

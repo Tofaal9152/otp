@@ -1,5 +1,5 @@
 "use client";
-import { VerifyOtpAction } from "@/actions/VerifyOtp";
+import { VerifyOtpAction } from "@/actions/auth-actions/VerifyOtp";
 import { Button } from "@/components/ui/button";
 import {
   InputOTP,
@@ -47,6 +47,7 @@ const VerifyOtpPage = () => {
         )}
         <Button
           type="submit"
+          disabled={isPending}
           className="w-full bg-gradient-to-r from-[#686df6] to-emerald-500 text-white py-2 rounded-lg text-lg font-semibold hover:opacity-90 transition"
         >
           {isPending && <Loader className="mr-2 animate-spin" size={18} />}

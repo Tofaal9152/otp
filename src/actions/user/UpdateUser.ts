@@ -1,24 +1,22 @@
-"use server";
-import { redirect } from "next/navigation";
-import { z } from "zod";
 import axios from "axios";
+import { z } from "zod";
 
-const OtpSchema = z.object({
-  otp: z.string().min(6, "please enter a valid otp"),
+const UserSchema = z.object({
+  name: z.string().min(1, "Please enter a valid name"),
 });
-type OtpType = {
-  errors: {
-    otp?: string[];
+type UserType = {
+  errors?: {
+    name?: string[];
     formError?: string[];
   };
+  success?: boolean;
 };
-export const VerifyOtpAction = async (
-  previousState: OtpType,
+export const UserAction = async (
+  previousState: UserType,
   formData: FormData
-): Promise<OtpType> => {
-  //  Validate the form data
-  const result = OtpSchema.safeParse({
-    otp: formData.get("otp"),
+): Promise<UserType> => {
+  const result = UserSchema.safeParse({
+    name: formData.get("name"),
   });
 
   if (!result.success) {
@@ -28,18 +26,19 @@ export const VerifyOtpAction = async (
   }
 
   try {
-    const res = await axios.post(
-      `${process.env.NEXT_PUBLIC_BACKEND_URL}/customer/verify-otp/`,
+    const res = await axios.put(
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}/customer/profile/`,
       {
-        otp: formData.get("otp"),
+        name: formData.get("name"),
       },
       {
         withCredentials: true,
       }
     );
-
     console.log(res.data);
   } catch (error) {
+    
+
     if (error instanceof Error) {
       return {
         errors: {
@@ -56,6 +55,7 @@ export const VerifyOtpAction = async (
       };
     }
   }
-
-  redirect("/auth/login");
+  return {
+    success: true,
+  };
 };

@@ -1,18 +1,38 @@
+"use client";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
   DialogContent,
   DialogDescription,
   DialogHeader,
+  DialogClose,
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Settings } from "lucide-react";
+import { Loader, Settings } from "lucide-react";
 import Aavtar from "./Aavtar";
-
-const ManageAccount = () => {
+import { useActionState, useEffect } from "react";
+import { UserAction } from "@/actions/user/UpdateUser";
+import { toast } from "sonner";
+type User = {
+  name: string;
+  email: string;
+  phone_number: string;
+};
+const ManageAccount: React.FC<{ user: User }> = ({ user }) => {
+  const [state, action, isPending] = useActionState(UserAction, {
+    errors: {},
+    success: false,
+  });
+  useEffect(() => {
+    if (state.success) {
+      toast.success("Account Updated Successfully!");
+    } else if (state.errors?.formError) {
+      toast.error("Error Updating Account");
+    }
+  }, [state.success, state.errors]);
   return (
     <Dialog>
       <DialogTrigger>
@@ -36,49 +56,67 @@ const ManageAccount = () => {
         <div className="flex flex-col items-center gap-3">
           <Aavtar className="w-20 h-20 border" />
 
-          <input
+          {/* <input
             type="file"
             accept="image/*"
             className="hidden"
             id="avatar-upload"
-          />
-          <Label
+          /> */}
+          {/* <Label
             htmlFor="avatar-upload"
             className="cursor-pointer text-xs text-blue-500 hover:underline dark:text-blue-400"
           >
             Change Profile Picture
-          </Label>
+          </Label> */}
         </div>
 
         {/* Form Fields */}
-        <div className="space-y-4 mt-4">
+        <form action={action} className="space-y-4 mt-4">
           <div>
             <Label htmlFor="name" className="text-sm">
               Full Name
             </Label>
-            <Input id="name" name="name" className="mt-1" />
+            <Input name="name" className="mt-1" defaultValue={user?.name} />
           </div>
+          {state.errors?.name && (
+            <p className="text-red-500 text-xs">{state.errors.name[0]}</p>
+          )}
 
           <div>
             <Label htmlFor="email" className="text-sm">
               Email
             </Label>
-            <Input id="email" name="email" className="mt-1" />
+            <Input disabled defaultValue={user?.email} className="mt-1" />
           </div>
 
           <div>
             <Label htmlFor="address" className="text-sm">
-              Address
+              Phone Number
             </Label>
-            <Input id="address" name="address" className="mt-1" />
+            <Input
+              disabled
+              defaultValue={user?.phone_number}
+              className="mt-1"
+            />
           </div>
-        </div>
 
-        {/* Buttons */}
-        <div className="flex justify-end gap-2 mt-4">
-          <Button variant="outline">Cancel</Button>
-          <Button>Save Changes</Button>
-        </div>
+          <div className="flex justify-end gap-2 mt-4">
+            <DialogClose>
+              <div className="border border-input bg-background shadow-xs hover:bg-accent hover:text-accent-foreground px-4 py-2 rounded-md text-sm cursor-pointer">
+                Cancel
+              </div>
+            </DialogClose>
+            <Button disabled={isPending}>
+              {isPending ? (
+                <span className="flex items-center gap-2">
+                  <Loader className="animate-spin" /> Updating...
+                </span>
+              ) : (
+                "Update Account"
+              )}
+            </Button>
+          </div>
+        </form>
       </DialogContent>
     </Dialog>
   );

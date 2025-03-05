@@ -1,9 +1,11 @@
 import ApiTokens from "./ApiTokens";
 
-const page = () => {
+const page = async () => {
+ 
+
   return (
     <div>
-      <ApiTokens />
+      <ApiTokens  />
     </div>
   );
 };

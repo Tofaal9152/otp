@@ -36,8 +36,8 @@ const Hero = () => {
             <Link href="/auth/register">
               <Button variant={"default"}>Sign Up for Free</Button>
             </Link>
-            <Link href="/auth/register">
-              <Button variant={"outline"}>See Pricing</Button>
+            <Link href="/documentation">
+              <Button variant={"outline"}>See Documentation</Button>
             </Link>
           </div>
           <p className="mt-8 text-base text-gray-500 dark:text-gray-400">

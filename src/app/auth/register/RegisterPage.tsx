@@ -1,5 +1,5 @@
 "use client";
-import { RegisterAction } from "@/actions/register";
+import { RegisterAction } from "@/actions/auth-actions/register";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { motion } from "framer-motion";
@@ -133,6 +133,7 @@ const RegisterPage = () => {
 
           <Button
             type="submit"
+            disabled={isPending}
             className="w-full bg-gradient-to-r from-[#686df6] to-emerald-500 text-white flex items-center justify-center"
           >
             {isPending && <Loader className="mr-2 animate-spin" size={18} />}

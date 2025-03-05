@@ -6,7 +6,7 @@ import { Loader, Lock, Mail } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import { useActionState } from "react";
-import { LoginAction } from "@/actions/login";
+import { LoginAction } from "@/actions/auth-actions/login";
 
 const LoginPage = () => {
   const [state, action, isPending] = useActionState(LoginAction, {

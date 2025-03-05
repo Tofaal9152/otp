@@ -5,25 +5,36 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import axios from "axios";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Aavtar from "./Aavtar";
 import UserButtonPopover from "./UserButtonPopover";
 
 const Profile = () => {
+  type User = {
+    name: string;
+    email: string;
+    phone_number: string;
+    api_key: string;
+    sms_quota: number;
+    customer: number;
+  };
+  const [user, setUser] = useState<User | null>(null);
+
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const response = await axios.get(
+        const res = await axios.get(
           `${process.env.NEXT_PUBLIC_BACKEND_URL}/customer/profile/`,
           { withCredentials: true }
         );
-        console.log(response.data);
+
+        setUser(res.data);
       } catch (err) {
         console.log(err);
       }
     };
 
-    fetchUser(); 
+    fetchUser();
   }, []);
 
   return (
@@ -32,7 +43,7 @@ const Profile = () => {
         <Aavtar className="w-8 h-8" />
       </PopoverTrigger>
       <PopoverContent>
-        <UserButtonPopover />
+        {user && <UserButtonPopover user={user} />}
       </PopoverContent>
     </Popover>
   );
