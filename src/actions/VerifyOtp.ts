@@ -1,27 +1,24 @@
-// "use server"
+"use server";
 import { redirect } from "next/navigation";
 import { z } from "zod";
 import axios from "axios";
 
-const LoginSchema = z.object({
-  email: z.string().email("please enter a valid email"),
-  password: z.string().min(0, "please enter a valid password"),
+const OtpSchema = z.object({
+  otp: z.string().min(6, "please enter a valid otp"),
 });
-type LoginType = {
+type OtpType = {
   errors: {
-    email?: string[];
-    password?: string[];
+    otp?: string[];
     formError?: string[];
   };
 };
-export const LoginAction = async (
-  previousState: LoginType,
+export const VerifyOtpAction = async (
+  previousState: OtpType,
   formData: FormData
-): Promise<LoginType> => {
+): Promise<OtpType> => {
   //  Validate the form data
-  const result = LoginSchema.safeParse({
-    email: formData.get("email"),
-    password: formData.get("password"),
+  const result = OtpSchema.safeParse({
+    otp: formData.get("otp"),
   });
 
   if (!result.success) {
@@ -32,15 +29,15 @@ export const LoginAction = async (
 
   try {
     const res = await axios.post(
-      `${process.env.NEXT_PUBLIC_BACKEND_URL}/rest-auth/login/`,
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}/customer/verify-otp/`,
       {
-        email: formData.get("email"),
-        password: formData.get("password"),
+        otp: formData.get("otp"),
       },
       {
         withCredentials: true,
       }
     );
+
     console.log(res.data);
   } catch (error) {
     if (error instanceof Error) {
@@ -60,5 +57,5 @@ export const LoginAction = async (
     }
   }
 
-  redirect("/");
+  redirect("/auth/login");
 };

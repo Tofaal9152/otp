@@ -45,7 +45,7 @@ const LoginPage = () => {
             />
             <Input
               type="email"
-              // required
+              required
               name="email"
               placeholder="Enter your email"
               className="pl-10 dark:bg-gray-800 dark:text-white focus:ring-[#686df6]"
@@ -64,7 +64,7 @@ const LoginPage = () => {
             />
             <Input
               type="password"
-              // required
+              required
               name="password"
               placeholder="Enter your password"
               className="pl-10 dark:bg-gray-800 dark:text-white focus:ring-[#686df6]"

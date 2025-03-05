@@ -1,9 +1,9 @@
-import ApiTokens from "./ApiTokens";
+import VerifyOtpPage from "./VerifyOtpPage";
 
 const page = () => {
   return (
     <div>
-      <ApiTokens />
+      <VerifyOtpPage />
     </div>
   );
 };

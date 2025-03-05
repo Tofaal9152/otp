@@ -1,7 +1,7 @@
 
 import Link from "next/link";
 import { Button } from "../ui/button";
-import Image from "next/image";
+// import Image from "next/image";
 
 const Hero = () => {
   if (typeof window !== "undefined") {
@@ -53,13 +53,13 @@ const Hero = () => {
 
               {/* Image with border inside gradient */}
               <div className="relative bg-white dark:bg-gray-900 rounded-lg overflow-hidden">
-                <Image
+                {/* <Image
                   width={1200}
                   height={800}
                   className="rounded-lg shadow-lg"
                   src="/heroimage.png"
                   alt="heroimage"
-                />
+                /> */}
               </div>
             </div>
           </div>

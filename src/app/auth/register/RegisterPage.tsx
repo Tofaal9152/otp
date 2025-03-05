@@ -1,17 +1,18 @@
 "use client";
+import { RegisterAction } from "@/actions/register";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { motion } from "framer-motion";
-import { Loader, Lock, Mail, User } from "lucide-react";
-import Link from "next/link";
+import { Loader, Lock, Mail, PhoneCall, User } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 import { useActionState } from "react";
-import { LoginAction } from "@/actions/login";
 
-const LoginPage = () => {
-  const [state, action, isPending] = useActionState(LoginAction, {
+const RegisterPage = () => {
+  const [state, action, isPending] = useActionState(RegisterAction, {
     errors: {},
   });
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -44,13 +45,15 @@ const LoginPage = () => {
             />
             <Input
               type="text"
+              required
+              name="name"
               placeholder="Full Name"
               className="pl-10 dark:bg-gray-800 dark:text-white focus:ring-[#686df6]"
             />
           </div>
-          {state.errors.formError && (
+          {state.errors.name && (
             <div className="bg-red-100 text-red-500 p-2 rounded-lg my-2">
-              {state.errors.formError}
+              {state.errors.name}
             </div>
           )}
           <div className="relative mb-4">
@@ -60,13 +63,34 @@ const LoginPage = () => {
             />
             <Input
               type="email"
+              name="email"
+              required
               placeholder="Email Address"
               className="pl-10 dark:bg-gray-800 dark:text-white focus:ring-[#686df6]"
             />
           </div>
-          {state.errors.formError && (
+          {state.errors.email && (
             <div className="bg-red-100 text-red-500 p-2 rounded-lg my-2">
-              {state.errors.formError}
+              {state.errors.email}
+            </div>
+          )}
+          <div className="relative mb-4">
+            <PhoneCall
+              size={18}
+              className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"
+            />
+            <Input
+              type="text"
+              name="phone_number"
+              required
+              defaultValue={"+8801"}
+              placeholder="Phone Number"
+              className="pl-10 dark:bg-gray-800 dark:text-white focus:ring-[#686df6]"
+            />
+          </div>
+          {state.errors.phone_number && (
+            <div className="bg-red-100 text-red-500 p-2 rounded-lg my-2">
+              {state.errors.phone_number}
             </div>
           )}
 
@@ -77,13 +101,33 @@ const LoginPage = () => {
             />
             <Input
               type="password"
+              name="password1"
+              required
               placeholder="Password"
               className="pl-10 dark:bg-gray-800 dark:text-white focus:ring-[#686df6]"
             />
           </div>
-          {state.errors.formError && (
+          {state.errors.password1 && (
             <div className="bg-red-100 text-red-500 p-2 rounded-lg my-2">
-              {state.errors.formError}
+              {state.errors.password1}
+            </div>
+          )}
+          <div className="relative mb-6">
+            <Lock
+              size={18}
+              className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"
+            />
+            <Input
+              type="password"
+              name="password2"
+              required
+              placeholder="Confirm Password"
+              className="pl-10 dark:bg-gray-800 dark:text-white focus:ring-[#686df6]"
+            />
+          </div>
+          {state.errors.password2 && (
+            <div className="bg-red-100 text-red-500 p-2 rounded-lg my-2">
+              {state.errors.password2}
             </div>
           )}
 
@@ -94,6 +138,11 @@ const LoginPage = () => {
             {isPending && <Loader className="mr-2 animate-spin" size={18} />}
             Register
           </Button>
+          {state.errors.formError && (
+            <div className="bg-red-100 text-red-500 p-2 rounded-lg mt-4">
+              {state.errors.formError}
+            </div>
+          )}
         </form>
 
         <div className="px-8 py-4 my-2 bg-gray-100 dark:bg-gray-800 text-center rounded-lg">
@@ -112,4 +161,4 @@ const LoginPage = () => {
   );
 };
 
-export default LoginPage;
+export default RegisterPage;

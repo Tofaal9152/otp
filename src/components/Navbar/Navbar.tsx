@@ -2,6 +2,7 @@ import Profile from "@/components/Profile/Profile";
 import Link from "next/link";
 import { Button } from "../ui/button";
 import MobileNavbar from "./MobileNavar";
+import { ModeToggle2 } from "../ui/ModeToggle2";
 
 const navItems = [
   { name: "Home", link: "/" },
@@ -39,6 +40,7 @@ const Navbar = () => {
         </ul>
         {/* login || profile || MobileNav */}
         <div className="flex items-center space-x-4">
+          <ModeToggle2 />
           {isLogin ? (
             <Profile />
           ) : (
