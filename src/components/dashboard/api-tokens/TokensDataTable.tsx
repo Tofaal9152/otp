@@ -1,4 +1,5 @@
 "use client";
+import GetApiToken from "@/actions/api-tokens/GetApiToken";
 import { Button } from "@/components/ui/button";
 import {
   Table,
@@ -9,28 +10,27 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import {
+  selectApiToken,
+  selectApiTokenRefresh,
+  setApiToken
+} from "@/redux/allStateSlice";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { Clipboard } from "lucide-react";
+import { useEffect } from "react";
 import DeleteAPiKeyButton from "./DeleteAPiKey";
-import { useEffect, useState } from "react";
-import axios from "axios";
 
 const TokensDataTable = () => {
-  const [apiKey, setApiKey] = useState<any>(null);
+  const dispatch = useAppDispatch();
+  const refresh = useAppSelector(selectApiTokenRefresh);
+  const apiToken = useAppSelector(selectApiToken);
   useEffect(() => {
-    const fetchTokens = async () => {
-      try {
-        const res = await axios.get(
-          `${process.env.NEXT_PUBLIC_BACKEND_URL}/customer/api-key/`,
-          { withCredentials: true }
-        );
+    GetApiToken().then((e) => {
+      dispatch(setApiToken(e));
+    });
+  }, [dispatch, refresh]);
 
-        setApiKey(res?.data?.api_key);
-      } catch (err) {
-        console.log(err);
-      }
-    };
-    fetchTokens();
-  }, []);
+  console.log(apiToken);
 
   return (
     <Table className="mt-6">
@@ -42,7 +42,7 @@ const TokensDataTable = () => {
         </TableRow>
       </TableHeader>
       <TableBody>
-        {!apiKey ? (
+        {!apiToken ? (
           <TableRow>
             <TableCell colSpan={2} className="text-center">
               No API Key found
@@ -50,9 +50,9 @@ const TokensDataTable = () => {
           </TableRow>
         ) : (
           <TableRow>
-            <TableCell>{apiKey}</TableCell>
+            <TableCell>{apiToken}</TableCell>
             <TableCell className="text-right space-x-2 flex items-center justify-end">
-              <CopyToken token={apiKey} />
+              <CopyToken token={apiToken} />
               <DeleteAPiKeyButton />
             </TableCell>
           </TableRow>

@@ -6,14 +6,14 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 const COLORS = ["#4CAF50", "#F44336", "#FFEB3B"];
 type PieChartComponentProps = {
-  analyticsDataPieChart: {
+  analyticsData: {
     id: number;
     title: string;
     value: number;
   }[];
 };
 const PieChartComponent: React.FC<PieChartComponentProps> = ({
-  analyticsDataPieChart,
+  analyticsData,
 }) => {
   return (
     <Card className="flex flex-col">
@@ -26,23 +26,35 @@ const PieChartComponent: React.FC<PieChartComponentProps> = ({
         <ResponsiveContainer width="100%" height={250}>
           <PieChart>
             <Pie
-              data={analyticsDataPieChart}
+              data={analyticsData}
               dataKey="value"
               nameKey="title"
               cx="50%"
               cy="50%"
               outerRadius={80}
+              innerRadius={50}
+              paddingAngle={5}
               fill="#8884d8"
-              label={(entry) => entry.title}
+              isAnimationActive={true}
+              label={({ name, percent }) =>
+                `${name} ${(percent * 100).toFixed(0)}%`
+              }
             >
-              {analyticsDataPieChart.map((entry, index) => (
+              {analyticsData.map((entry, index) => (
                 <Cell
                   key={`cell-${index}`}
                   fill={COLORS[index % COLORS.length]}
+                  className="transition-all duration-300 hover:opacity-80"
                 />
               ))}
             </Pie>
-            <Tooltip />
+            <Tooltip
+              contentStyle={{
+                borderRadius: "8px",
+                border: "none",
+              }}
+              itemStyle={{ fontSize: "14px" }}
+            />
           </PieChart>
         </ResponsiveContainer>
       </CardContent>

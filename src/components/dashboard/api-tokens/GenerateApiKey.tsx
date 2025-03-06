@@ -1,21 +1,20 @@
 "use client";
-import { GenerateApiKeyAction } from "@/actions/api-key/GenerateApiToken";
+import { GenerateApiKeyAction } from "@/actions/api-tokens/GenerateApiToken";
 import { Button } from "@/components/ui/button";
+import { setApiTokenRefresh } from "@/redux/allStateSlice";
+import { useAppDispatch } from "@/redux/hooks";
 import { Loader, Plus } from "lucide-react";
 import { useActionState, useEffect } from "react";
-import { toast } from "sonner";
 const GenerateApiKey = () => {
-  const [state, action, isPending] = useActionState(GenerateApiKeyAction, {
+  const dispatch = useAppDispatch();
+  const [, action, isPending] = useActionState(GenerateApiKeyAction, {
     errors: {},
-    success: false,
   });
   useEffect(() => {
-    if (state.success) {
-      toast.success("API Key Generated Successfully!");
-    } else if (state.errors?.formError) {
-      toast.error("Error Creating API Key");
+    if (isPending) {
+      dispatch(setApiTokenRefresh());
     }
-  }, [state.success, state.errors]);
+  }, [isPending, dispatch]);
   return (
     <form action={action}>
       <Button

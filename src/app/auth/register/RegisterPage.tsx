@@ -1,5 +1,5 @@
 "use client";
-import { RegisterAction } from "@/actions/auth-actions/register";
+import { RegisterAction } from "@/actions/auth/register";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { motion } from "framer-motion";

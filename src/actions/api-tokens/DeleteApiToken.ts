@@ -1,10 +1,10 @@
 import axios from "axios";
+import { toast } from "sonner";
 
 type DeleteApiKey = {
   errors?: {
     formError?: string[];
   };
-  success?: boolean;
 };
 
 export const DeleteApiKeyAction = async (): Promise<DeleteApiKey> => {
@@ -15,18 +15,15 @@ export const DeleteApiKeyAction = async (): Promise<DeleteApiKey> => {
         withCredentials: true,
       }
     );
-
     console.log(res.data);
-
-    return {
-      success: true,
-    };
+    toast.success("API Key Deleted Successfully!");
+    return {};
   } catch (error) {
+    toast.error("Error Deleting API Key");
+    console.log(error);
     return {
       errors: {
-        formError: axios.isAxiosError(error)
-          ? [error.response?.data?.message || "Error Deleting API Key"]
-          : [error instanceof Error ? error.message : "Unknown error"],
+        formError: ["Error Deleting API Key"],
       },
     };
   }

@@ -1,8 +1,11 @@
+"use client";
 import Profile from "@/components/Profile/Profile";
+import { selectGetProfile } from "@/redux/allStateSlice";
+import { useAppSelector } from "@/redux/hooks";
 import Link from "next/link";
 import { Button } from "../ui/button";
-import MobileNavbar from "./MobileNavar";
 import { ModeToggle2 } from "../ui/ModeToggle2";
+import MobileNavbar from "./MobileNavar";
 
 const navItems = [
   { name: "Home", link: "/" },
@@ -10,9 +13,10 @@ const navItems = [
   { name: "Dahsboard", link: "/dashboard" },
 ];
 
-const isLogin = true;
-
 const Navbar = () => {
+  const user = useAppSelector(selectGetProfile);
+  // check if user is login
+  const isLogin = user ? true : false;
   return (
     <nav className="z-50 bg-opacity-30 backdrop-blur-lg sticky top-0 p-4 border-b dark:bg-gray-900/50">
       <div className="container mx-auto flex items-center justify-between lg:px-8">

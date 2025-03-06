@@ -1,38 +1,37 @@
 "use client";
+import { ProfileAction } from "@/actions/profile/UpdateProfile";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
+  DialogClose,
   DialogContent,
   DialogDescription,
   DialogHeader,
-  DialogClose,
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { setProfilRefresh } from "@/redux/allStateSlice";
+import { useAppDispatch } from "@/redux/hooks";
 import { Loader, Settings } from "lucide-react";
-import Aavtar from "./Aavtar";
 import { useActionState, useEffect } from "react";
-import { UserAction } from "@/actions/user/UpdateUser";
-import { toast } from "sonner";
+import Aavtar from "./Aavtar";
 type User = {
   name: string;
   email: string;
   phone_number: string;
 };
 const ManageAccount: React.FC<{ user: User }> = ({ user }) => {
-  const [state, action, isPending] = useActionState(UserAction, {
+  const dispatch = useAppDispatch();
+  const [state, action, isPending] = useActionState(ProfileAction, {
     errors: {},
-    success: false,
   });
   useEffect(() => {
-    if (state.success) {
-      toast.success("Account Updated Successfully!");
-    } else if (state.errors?.formError) {
-      toast.error("Error Updating Account");
+    if (isPending) {
+      dispatch(setProfilRefresh());
     }
-  }, [state.success, state.errors]);
+  }, [isPending, dispatch]);
   return (
     <Dialog>
       <DialogTrigger>

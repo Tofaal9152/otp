@@ -1,5 +1,5 @@
 "use client";
-import { VerifyOtpAction } from "@/actions/auth-actions/VerifyOtp";
+import { VerifyOtpAction } from "@/actions/auth/VerifyOtp";
 import { Button } from "@/components/ui/button";
 import {
   InputOTP,

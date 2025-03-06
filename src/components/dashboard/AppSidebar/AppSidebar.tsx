@@ -76,7 +76,7 @@ const data = {
   projects: [
     {
       name: "Send Msg or Otp",
-      url: "/dashboard/SendSms",
+      url: "/dashboard/send-sms-otp",
       icon: MessageSquareMore,
     },
     {

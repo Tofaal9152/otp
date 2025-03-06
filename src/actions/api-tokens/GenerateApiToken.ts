@@ -1,12 +1,11 @@
 import axios from "axios";
+import { toast } from "sonner";
 
 type GenerateApiKey = {
   errors?: {
     formError?: string[];
   };
-  success?: boolean;
 };
-
 export const GenerateApiKeyAction = async (): Promise<GenerateApiKey> => {
   try {
     const res = await axios.post(
@@ -18,16 +17,14 @@ export const GenerateApiKeyAction = async (): Promise<GenerateApiKey> => {
     );
 
     console.log("data", res.data);
-
-    return {
-      success: true,
-    };
+    toast.success("API Key generated successfully");
+    return {};
   } catch (error) {
+    toast.error("Failed to generate API Key");
+    console.error(error);
     return {
       errors: {
-        formError: axios.isAxiosError(error)
-          ? [error.response?.data?.message || "Error Generating API Key"]
-          : [error instanceof Error ? error.message : "Unknown error"],
+        formError: ["Failed to generate API Key"],
       },
     };
   }

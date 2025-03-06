@@ -1,42 +1,31 @@
 "use client";
+import GetProfile from "@/actions/profile/GetProfile";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import axios from "axios";
-import { useEffect, useState } from "react";
+import {
+  selectGetProfile,
+  selectProfilRefresh,
+  setAvailableSms,
+  setGetProfile,
+} from "@/redux/allStateSlice";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
+import { useEffect } from "react";
 import Aavtar from "./Aavtar";
 import UserButtonPopover from "./UserButtonPopover";
 
 const Profile = () => {
-  type User = {
-    name: string;
-    email: string;
-    phone_number: string;
-    api_key: string;
-    sms_quota: number;
-    customer: number;
-  };
-  const [user, setUser] = useState<User | null>(null);
-
+  const dispatch = useAppDispatch();
+  const refresh = useAppSelector(selectProfilRefresh);
   useEffect(() => {
-    const fetchUser = async () => {
-      try {
-        const res = await axios.get(
-          `${process.env.NEXT_PUBLIC_BACKEND_URL}/customer/profile/`,
-          { withCredentials: true }
-        );
-
-        setUser(res.data);
-      } catch (err) {
-        console.log(err);
-      }
-    };
-
-    fetchUser();
-  }, []);
-
+    GetProfile().then((e) => {
+      dispatch(setGetProfile(e));
+      dispatch(setAvailableSms(e.sms_quota));
+    });
+  }, [dispatch, refresh]);
+  const user = useAppSelector(selectGetProfile);
   return (
     <Popover>
       <PopoverTrigger>

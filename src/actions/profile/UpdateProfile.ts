@@ -1,21 +1,21 @@
 import axios from "axios";
+import { toast } from "sonner";
 import { z } from "zod";
 
-const UserSchema = z.object({
+const ProfileSchema = z.object({
   name: z.string().min(1, "Please enter a valid name"),
 });
-type UserType = {
+type profileProps = {
   errors?: {
     name?: string[];
     formError?: string[];
   };
-  success?: boolean;
 };
-export const UserAction = async (
-  previousState: UserType,
+export const ProfileAction = async (
+  previousState: profileProps,
   formData: FormData
-): Promise<UserType> => {
-  const result = UserSchema.safeParse({
+): Promise<profileProps> => {
+  const result = ProfileSchema.safeParse({
     name: formData.get("name"),
   });
 
@@ -36,9 +36,12 @@ export const UserAction = async (
       }
     );
     console.log(res.data);
+    toast.success("Profile updated successfully");
+    return {
+      errors: {},
+    };
   } catch (error) {
-    
-
+    toast.error("Failed to update profile");
     if (error instanceof Error) {
       return {
         errors: {
@@ -55,7 +58,4 @@ export const UserAction = async (
       };
     }
   }
-  return {
-    success: true,
-  };
 };
