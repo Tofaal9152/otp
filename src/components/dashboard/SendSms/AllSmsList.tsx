@@ -6,7 +6,6 @@ import {
   TableBody,
   TableCaption,
   TableCell,
-  TableFooter,
   TableHead,
   TableHeader,
   TableRow,
@@ -19,19 +18,22 @@ import {
 } from "@/redux/allStateSlice";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { MessageSquareMore } from "lucide-react";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import Pagination from "./Pagination";
 
 const AllSmsListTable = () => {
   const dispatch = useAppDispatch();
   const refresh = useAppSelector(selectSendSmsRefresh);
+  const allSmsList = useAppSelector(selectAllSmsList);
+
+  const [currentPage, setCurrentPage] = useState(1);
+
   useEffect(() => {
-    AllSmsList().then((e) => {
+    AllSmsList(currentPage).then((e) => {
       dispatch(setAllSmsList(e));
       dispatch(setSentSms(e.count));
     });
-  }, [dispatch, refresh]);
-  const allSmsList = useAppSelector(selectAllSmsList);
-  console.log(allSmsList);
+  }, [dispatch, refresh, currentPage]);
 
   return (
     <div className="space-y-6 w-full px-4">
@@ -39,8 +41,9 @@ const AllSmsListTable = () => {
         <MessageSquareMore size={25} />
         <span>SMS List</span>
       </h1>
+
       <div className="overflow-x-auto bg-white dark:bg-gray-900 p-4 rounded-lg shadow-lg">
-        <Table>
+        <Table className="overflow-x-auto w-full">
           <TableCaption>List of Sent SMS</TableCaption>
           <TableHeader>
             <TableRow className="bg-gray-100 dark:bg-gray-800">
@@ -70,8 +73,8 @@ const AllSmsListTable = () => {
                   <TableCell className="text-center">
                     <Badge
                       className={`${
-                        item.status === "SENT" ? "bg-green-500" : "bg-red-500"
-                      } text-black dark:text-white`}
+                        item.status === "SENT" ? "bg-green-500" : item.status === "QUEUED" ? "bg-yellow-500" : "bg-red-500"
+                      } text-white`}
                     >
                       {item.status}
                     </Badge>
@@ -80,14 +83,22 @@ const AllSmsListTable = () => {
               ))
             )}
           </TableBody>
-          <TableFooter></TableFooter>
         </Table>
+
+        {/* Pagination */}
+        <Pagination
+          currentPage={currentPage}
+          setCurrentPage={setCurrentPage}
+          allSmsList={allSmsList}
+        />
       </div>
     </div>
   );
 };
 
 export default AllSmsListTable;
+
+// Helper functions
 const truncateMessage = (message: string, maxLength: number = 30) => {
   return message.length > maxLength
     ? message.substring(0, maxLength) + "..."

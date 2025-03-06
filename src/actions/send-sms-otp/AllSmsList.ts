@@ -1,17 +1,14 @@
 import axios from "axios";
 
-const AllSmsList = async () => {
+const AllSmsList = async (page: number = 1) => {
   try {
     const res = await axios.get(
-      `${process.env.NEXT_PUBLIC_BACKEND_URL}/customer/all-sms/`,
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}/customer/all-sms/?p=${page}`,
       { withCredentials: true }
     );
-    console.log(res.data);
-
     return res?.data;
   } catch (error: any) {
-    console.log(error);
+    console.error(error);
   }
 };
-
 export default AllSmsList;
