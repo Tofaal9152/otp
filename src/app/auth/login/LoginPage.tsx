@@ -41,7 +41,7 @@ const LoginPage = () => {
 
       console.log(res.data);
       toast.success("Otp sent successfully");
-      router.replace("/auth/verify-otp");
+      router.push("/auth/verify-otp");
     } catch (error) {
       toast.error("Error in resending otp");
       console.log(error);
