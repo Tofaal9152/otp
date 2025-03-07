@@ -6,7 +6,9 @@ type GenerateApiKey = {
     formError?: string[];
   };
 };
-export const GenerateApiKeyAction = async (): Promise<GenerateApiKey> => {
+export const GenerateApiKeyAction = async (
+  
+): Promise<GenerateApiKey> => {
   try {
     const res = await axios.post(
       `${process.env.NEXT_PUBLIC_BACKEND_URL}/customer/api-key/`,

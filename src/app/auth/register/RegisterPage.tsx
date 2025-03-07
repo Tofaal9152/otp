@@ -52,7 +52,7 @@ const RegisterPage = () => {
             />
           </div>
           {state.errors.name && (
-            <div className="bg-red-100 text-red-500 p-2 rounded-lg my-2">
+            <div className="bg-red-100 text-red-500 p-2 text-sm rounded-lg my-2">
               {state.errors.name}
             </div>
           )}
@@ -70,26 +70,34 @@ const RegisterPage = () => {
             />
           </div>
           {state.errors.email && (
-            <div className="bg-red-100 text-red-500 p-2 rounded-lg my-2">
+            <div className="bg-red-100 text-red-500 p-2 text-sm rounded-lg my-2">
               {state.errors.email}
             </div>
           )}
-          <div className="relative mb-4">
+
+          <div className="relative mb-4 flex items-center">
+            <span className="absolute left-9  text-gray-500 dark:text-gray-300">
+              +88
+            </span>
+
+            {/* Phone Icon */}
             <PhoneCall
               size={18}
               className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"
             />
+
+            {/* Input Field */}
             <Input
               type="text"
               name="phone_number"
               required
-              defaultValue={"+8801"}
-              placeholder="Phone Number"
-              className="pl-10 dark:bg-gray-800 dark:text-white focus:ring-[#686df6]"
+              placeholder="01XXXXXXXXX"
+              className="pl-18 dark:bg-gray-800 dark:text-white focus:ring-[#686df6]"
             />
           </div>
+
           {state.errors.phone_number && (
-            <div className="bg-red-100 text-red-500 p-2 rounded-lg my-2">
+            <div className="bg-red-100 text-red-500 p-2 text-sm rounded-lg my-2">
               {state.errors.phone_number}
             </div>
           )}
@@ -108,7 +116,7 @@ const RegisterPage = () => {
             />
           </div>
           {state.errors.password1 && (
-            <div className="bg-red-100 text-red-500 p-2 rounded-lg my-2">
+            <div className="bg-red-100 text-red-500 p-2 text-sm rounded-lg my-2">
               {state.errors.password1}
             </div>
           )}
@@ -126,7 +134,7 @@ const RegisterPage = () => {
             />
           </div>
           {state.errors.password2 && (
-            <div className="bg-red-100 text-red-500 p-2 rounded-lg my-2">
+            <div className="bg-red-100 text-red-500 p-2 text-sm rounded-lg my-2">
               {state.errors.password2}
             </div>
           )}
@@ -140,7 +148,7 @@ const RegisterPage = () => {
             Register
           </Button>
           {state.errors.formError && (
-            <div className="bg-red-100 text-red-500 p-2 rounded-lg mt-4">
+            <div className="bg-red-100 text-red-500 p-2 text-sm rounded-lg mt-4">
               {state.errors.formError}
             </div>
           )}

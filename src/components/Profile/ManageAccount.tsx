@@ -28,7 +28,7 @@ const ManageAccount: React.FC<{ user: User }> = ({ user }) => {
     errors: {},
   });
   useEffect(() => {
-    if (isPending) {
+    if (!isPending) {
       dispatch(setProfilRefresh());
     }
   }, [isPending, dispatch]);

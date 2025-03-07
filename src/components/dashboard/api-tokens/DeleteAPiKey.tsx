@@ -11,11 +11,12 @@ const DeleteAPiKeyButton = () => {
   const [, action, isPending] = useActionState(DeleteApiKeyAction, {
     errors: {},
   });
+  
   useEffect(() => {
-    if (isPending) {
+    if (!isPending) {
       dispatch(setApiTokenRefresh());
     }
-  }, [dispatch, isPending]);
+  }, [isPending, dispatch]);
   return (
     <form action={action}>
       <Button

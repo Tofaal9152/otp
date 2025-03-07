@@ -1,16 +1,10 @@
-
 import { redirect } from "next/navigation";
 import { z } from "zod";
 import axios from "axios";
 
 const RegisterSchema = z.object({
   name: z.string().min(1, "Please enter a valid name"),
-  phone_number: z
-    .string()
-    .regex(
-      /^\+8801\d{9}$/,
-      "Phone number must start with +88 and be 11 digits"
-    ),
+  phone_number: z.string().min(11, "Phone number must be 11 digits"),
   email: z.string().email("Please enter a valid email"),
   password1: z.string().min(6, "Password must be at least 6 characters"),
   password2: z.string().min(6, "Password must be at least 6 characters"),

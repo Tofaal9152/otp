@@ -24,15 +24,15 @@ const Hero = () => {
               <span className="absolute inset-0 bg-gradient-to-r from-[#44BCFF] via-[#FF44EC] to-[#7c5eff] blur-lg opacity-30"></span>
               <span className="relative">
                 {" "}
-                starting from just{" "}
+                powered by{" "}
                 <span className="bg-gradient-to-r from-[#FF44EC] via-violet-600 to-[#FF675E] text-transparent bg-clip-text">
-                  1 Taka!
+                  AI!
                 </span>{" "}
               </span>
             </span>
           </p>
           <p className="mt-4 text-lg text-gray-600 dark:text-gray-300">
-            Secure, fast, and cost-effective OTP solutions for your business.
+          Experience secure, fast, and cost-effective OTP solutions for your business, enhanced by AI technology.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center mt-9 space-y-4 sm:space-y-0 sm:space-x-5">
             <Link

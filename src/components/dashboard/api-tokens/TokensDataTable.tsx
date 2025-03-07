@@ -24,14 +24,16 @@ import { toast } from "sonner";
 const TokensDataTable = () => {
   const dispatch = useAppDispatch();
   const refresh = useAppSelector(selectApiTokenRefresh);
-  const apiToken = useAppSelector(selectApiToken);
+
   useEffect(() => {
     GetApiToken().then((e) => {
       dispatch(setApiToken(e));
     });
   }, [dispatch, refresh]);
 
-  console.log(apiToken);
+  const apiToken = useAppSelector(selectApiToken);
+  // console.log(apiToken);
+  console.log(refresh);
 
   return (
     <Table className="mt-6">

@@ -4,7 +4,7 @@ import { z } from "zod";
 
 const SendSmsSchema = z.object({
   message: z.string().min(1, "please enter a valid message"),
-  recipient: z.string().min(1, "please enter a valid recipient"),
+  recipient: z.string().min(11, "please enter a valid recipient"),
 });
 type SendSmsProps = {
   errors: {

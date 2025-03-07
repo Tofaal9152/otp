@@ -21,7 +21,7 @@ const SendSMS = () => {
     }
   );
   useEffect(() => {
-    if (isPending && state) {
+    if (!isPending) {
       dispatch(setSendSmsRefresh());
     }
   }, [isPending, dispatch, state]);
@@ -62,10 +62,36 @@ const SendSMS = () => {
             <Label className="block text-sm font-medium mb-1 text-gray-700 dark:text-gray-300">
               {isBulk ? "Recipients (comma-separated)" : "Recipient"}
             </Label>
+
+            <div className="relative">
+              {/* +88 Prefix */}
+              <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500 dark:text-gray-300">
+                +88
+              </span>
+
+              {/* Input Field */}
+              <Input
+                name="recipient"
+                placeholder={isBulk ? "01XXXXXXX, 01XXXXXXX" : "01XXXXXXX"}
+                className="w-full pl-12 dark:bg-gray-800 dark:text-white"
+              />
+            </div>
+
+            <p className="text-xs text-gray-500 mt-1">
+              {isBulk
+                ? "Enter multiple phone numbers separated by commas."
+                : "Enter a single phone number."}
+            </p>
+          </div>
+
+          {/* <div className="mb-4">
+            <Label className="block text-sm font-medium mb-1 text-gray-700 dark:text-gray-300">
+              {isBulk ? "Recipients (comma-separated)" : "Recipient"}
+            </Label>
             <Input
               name="recipient"
               placeholder={
-                isBulk ? "+88017XXXXXX , +88017XXXXXX" : "+88017XXXXXX"
+                isBulk ? "01XXXXXXX , 01XXXXXXX" : "01XXXXXXX"
               }
               className="w-full dark:bg-gray-800 dark:text-white"
             />
@@ -74,7 +100,7 @@ const SendSMS = () => {
                 ? "Enter multiple phone numbers separated by commas."
                 : "Enter a single phone number."}
             </p>
-          </div>
+          </div> */}
           {state.errors.recipient && (
             <div className="bg-red-100 text-red-500 p-2 rounded-lg my-2 mt-4">
               {state.errors.recipient}

@@ -88,7 +88,7 @@ const LoginPage = () => {
             />
           </div>
           {state.errors.email && (
-            <div className="bg-red-100 text-red-500 p-2 rounded-lg mb-4">
+            <div className="bg-red-100 text-red-500 p-2 text-sm rounded-lg mb-4">
               {state.errors.email}
             </div>
           )}
@@ -107,18 +107,18 @@ const LoginPage = () => {
             />
           </div>
           {state.errors.password && (
-            <div className="bg-red-100 text-red-500 p-2 rounded-lg mb-4">
+            <div className="bg-red-100 text-red-500 p-2 text-sm rounded-lg mb-4">
               {state.errors.password}
             </div>
           )}
 
           <div className="flex items-center justify-between mb-6">
-            <Link
-              href="/forgot-password"
+            <p
+              // href="/forgot-password"
               className="text-sm text-[#686df6] hover:underline"
             >
               Forgot password?
-            </Link>
+            </p>
           </div>
 
           <Button
@@ -130,18 +130,18 @@ const LoginPage = () => {
             Login
           </Button>
           {state.errors.formError && (
-            <div className="bg-red-100 text-red-500 p-2 rounded-lg mt-4">
+            <div className="bg-red-100 text-red-500 p-2 text-sm rounded-lg mt-4">
               {state.errors.formError}
             </div>
           )}
           {state.errors.verified && (
-            <div className="bg-red-100 text-red-500 p-2 rounded-lg mt-4">
-              {`${state.errors.verified}`}{" "}
+            <div className="bg-red-100 text-red-500 p-2 text-sm  rounded-lg mt-4">
+              Please verify your phone number.
               <span
                 onClick={handleResendOtp}
                 className="underline cursor-pointer"
               >
-                Resend Otp
+                Send OTP
               </span>
             </div>
           )}
