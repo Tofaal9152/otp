@@ -2,12 +2,11 @@
 import Profile from "@/components/Profile/Profile";
 import { selectIsLogin } from "@/redux/allStateSlice";
 import { useAppSelector } from "@/redux/hooks";
+import { LogInIcon } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
-import { Button } from "../ui/button";
 import { ModeToggle2 } from "../ui/ModeToggle2";
 import MobileNavbar from "./MobileNavar";
-import Image from "next/image";
-import { LogIn, LogInIcon } from "lucide-react";
 
 const Navbar = () => {
   const isLogin = useAppSelector(selectIsLogin);
