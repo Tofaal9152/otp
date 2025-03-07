@@ -7,12 +7,12 @@ export function ModeToggle() {
   const { theme, setTheme } = useTheme();
 
   return (
-    <div className="border-b  pb-3 pt-1">
+    <div className="">
       <div className="flex  items-center gap-3">
         <div className="flex  items-center gap-2">
           <div
             onClick={() => setTheme("light")}
-            className={`flex cursor-pointer  items-center gap-2 ${
+            className={`flex cursor-pointer p-2 rounded-md hover:bg-accent  items-center gap-2 ${
               theme === "light" ? "text-yellow-500 " : "text-gray-500 "
             }`}
           >
@@ -21,7 +21,7 @@ export function ModeToggle() {
           </div>
           <div
             onClick={() => setTheme("dark")}
-            className={`flex cursor-pointer  items-center gap-2 ${
+            className={`flex cursor-pointer p-2 rounded-md hover:bg-accent items-center gap-2 ${
               theme === "dark" ? "text-blue-400 " : "text-gray-500 "
             }`}
           >

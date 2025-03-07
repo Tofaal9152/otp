@@ -1,17 +1,23 @@
 "use client";
+import { LoginAction } from "@/actions/auth/login";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { setIsLogin } from "@/redux/allStateSlice";
+import { useAppDispatch } from "@/redux/hooks";
 import { motion } from "framer-motion";
 import { Loader, Lock, Mail } from "lucide-react";
-import Link from "next/link";
 import Image from "next/image";
-import { useActionState } from "react";
-import { LoginAction } from "@/actions/auth/login";
+import Link from "next/link";
+import { useActionState, useEffect } from "react";
 
 const LoginPage = () => {
+  const dispatch = useAppDispatch();
   const [state, action, isPending] = useActionState(LoginAction, {
     errors: {},
   });
+  useEffect(() => {
+    dispatch(setIsLogin(true));
+  }, [dispatch]);
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}

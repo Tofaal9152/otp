@@ -68,7 +68,7 @@ const data = {
         },
         {
           title: "API Guide",
-          url: "/dashboard/doc/get-started",
+          url: "/dashboard/doc/api-guide",
         },
       ],
     },

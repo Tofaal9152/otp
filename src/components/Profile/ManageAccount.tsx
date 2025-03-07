@@ -34,11 +34,9 @@ const ManageAccount: React.FC<{ user: User }> = ({ user }) => {
   }, [isPending, dispatch]);
   return (
     <Dialog>
-      <DialogTrigger>
-        <div className="flex pb-3 pt-1 items-center border-b gap-3  cursor-pointer transition dark:text-slate-300">
-          <Settings className="w-4 h-4" />
-          <span className="text-xs font-medium">Manage Account</span>
-        </div>
+      <DialogTrigger className="flex p-2  mt-2 rounded-md hover:bg-accent items-center gap-3  cursor-pointer transition dark:text-slate-300">
+        <Settings className="w-4 h-4" />
+        <span className="text-xs font-medium">Manage Account</span>
       </DialogTrigger>
 
       <DialogContent className="max-w-lg p-6 rounded-lg ">

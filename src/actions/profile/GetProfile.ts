@@ -6,7 +6,7 @@ const GetProfile = async () => {
       `${process.env.NEXT_PUBLIC_BACKEND_URL}/customer/profile/`,
       { withCredentials: true }
     );
-    // console.log(res.data);
+    console.log(res.data);
 
     return res?.data;
   } catch (error: any) {

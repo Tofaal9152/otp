@@ -1,6 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { RootState } from "./store";
 interface problemState {
+  // check user login or not
+  isLogin: boolean;
   // profile
   profilRefresh: boolean;
   getProfile: any;
@@ -16,6 +18,8 @@ interface problemState {
 }
 
 const initialState: problemState = {
+  // check user login or not
+  isLogin: false,
   // profile
   profilRefresh: false,
   getProfile: [],
@@ -34,6 +38,10 @@ export const allStateSlice = createSlice({
   name: "problem",
   initialState,
   reducers: {
+    //  check user login or not
+    setIsLogin: (state, action) => {
+      state.isLogin = action.payload;
+    },
     // profile
     setProfilRefresh: (state) => {
       state.profilRefresh = !state.profilRefresh;
@@ -66,6 +74,8 @@ export const allStateSlice = createSlice({
 });
 
 export const {
+  // check user login or not
+  setIsLogin,
   // profile
   setProfilRefresh,
   setGetProfile,
@@ -79,6 +89,9 @@ export const {
   setAvailableSms,
   setSentSms,
 } = allStateSlice.actions;
+
+// check user login or not
+export const selectIsLogin = (state: RootState) => state.problem.isLogin;
 // profile
 export const selectProfilRefresh = (state: RootState) =>
   state.problem.profilRefresh;

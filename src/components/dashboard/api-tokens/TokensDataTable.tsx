@@ -13,12 +13,13 @@ import {
 import {
   selectApiToken,
   selectApiTokenRefresh,
-  setApiToken
+  setApiToken,
 } from "@/redux/allStateSlice";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { Clipboard } from "lucide-react";
 import { useEffect } from "react";
 import DeleteAPiKeyButton from "./DeleteAPiKey";
+import { toast } from "sonner";
 
 const TokensDataTable = () => {
   const dispatch = useAppDispatch();
@@ -67,7 +68,10 @@ export default TokensDataTable;
 const CopyToken = ({ token }: { token: string }) => {
   return (
     <Button
-      onClick={() => navigator.clipboard.writeText(token)}
+      onClick={() => {
+        navigator.clipboard.writeText(token);
+        toast.success("Copied to clipboard");
+      }}
       className="p-2"
       variant="outline"
     >

@@ -7,6 +7,7 @@ import {
 } from "@/components/ui/popover";
 import {
   selectGetProfile,
+  selectIsLogin,
   selectProfilRefresh,
   setAvailableSms,
   setGetProfile,
@@ -18,13 +19,15 @@ import UserButtonPopover from "./UserButtonPopover";
 
 const Profile = () => {
   const dispatch = useAppDispatch();
+  const isLogin = useAppSelector(selectIsLogin);
   const refresh = useAppSelector(selectProfilRefresh);
   useEffect(() => {
     GetProfile().then((e) => {
       dispatch(setGetProfile(e));
       dispatch(setAvailableSms(e.sms_quota));
     });
-  }, [dispatch, refresh]);
+  }, [dispatch, refresh, isLogin]);
+
   const user = useAppSelector(selectGetProfile);
   return (
     <Popover>
@@ -33,6 +36,7 @@ const Profile = () => {
       </PopoverTrigger>
       <PopoverContent>
         {user && <UserButtonPopover user={user} />}
+        
       </PopoverContent>
     </Popover>
   );

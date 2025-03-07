@@ -1,4 +1,4 @@
-import GetStartedPage from "../../dashboard/doc/get-started/page";
+import GetStartedPage from "../../dashboard/doc/api-guide/page";
 
 const page = () => {
     return (

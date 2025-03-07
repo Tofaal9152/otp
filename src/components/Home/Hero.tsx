@@ -1,12 +1,14 @@
-
+"use client";
 import Link from "next/link";
 import { Button } from "../ui/button";
-// import Image from "next/image";
+import { selectIsLogin } from "@/redux/allStateSlice";
+import { useAppSelector } from "@/redux/hooks";
 
 const Hero = () => {
-  if (typeof window !== "undefined") {
-    localStorage.getItem("user")
-  }
+  const isLogin = useAppSelector(selectIsLogin);
+  console.log('====================================');
+  console.log(isLogin);
+  console.log('====================================');
   return (
     <div className="relative isolate overflow-hidden bg-white dark:bg-gray-900 transition-colors">
       <div className="absolute inset-0 -z-10 bg-[radial-gradient(45rem_50rem_at_top,var(--color-indigo-100),white)] opacity-20 dark:bg-[radial-gradient(45rem_50rem_at_top,var(--color-indigo-800),white)]"></div>
@@ -33,11 +35,15 @@ const Hero = () => {
             Secure, fast, and cost-effective OTP solutions for your business.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center mt-9 space-y-4 sm:space-y-0 sm:space-x-5">
-            <Link href="/auth/register">
-              <Button variant={"default"}>Sign Up for Free</Button>
+            <Link href={`${isLogin ? "/dashboard/api-tokens" : "/auth/signup"}`}>
+              <Button variant={"default"}>
+                {isLogin ? "Get Api Token" : "Sign Up Now!"}
+              </Button>
             </Link>
-            <Link href="/documentation">
-              <Button variant={"outline"}>See Documentation</Button>
+            <Link href={`${isLogin ? "/dashboard/send-sms-otp" : "/documentation"}`}>
+              <Button variant={"outline"}>{
+                isLogin ? "Send SMS or OTP!" : "Documentation"
+                }</Button>
             </Link>
           </div>
           <p className="mt-8 text-base text-gray-500 dark:text-gray-400">
