@@ -7,6 +7,7 @@ import { Button } from "../ui/button";
 import { ModeToggle2 } from "../ui/ModeToggle2";
 import MobileNavbar from "./MobileNavar";
 import Image from "next/image";
+import { LogIn, LogInIcon } from "lucide-react";
 
 const Navbar = () => {
   const isLogin = useAppSelector(selectIsLogin);
@@ -27,7 +28,13 @@ const Navbar = () => {
         {/* Logo */}
         <MobileNavbar navItems={navItems} />
         <Link href="/">
-          <Image src="/logo.jpg" alt="logo" className="rounded-full border-2 border-sky-500" width={50} height={50} />
+          <Image
+            src="/logo.jpg"
+            alt="logo"
+            className="rounded-full border-2 border-sky-500"
+            width={50}
+            height={50}
+          />
         </Link>
 
         {/* Desktop Nav Items */}
@@ -50,7 +57,12 @@ const Navbar = () => {
             <Profile />
           ) : (
             <Link href="/auth/login">
-              <Button>Login</Button>
+              <div className="relative flex space-x-2 items-center z-10 rounded-full bg-sky-500 text-white py-[6.5px] px-6  ">
+                <span className="flex items-center space-x-1">
+                  <LogInIcon size={16} />
+                  <span>Login</span>
+                </span>
+              </div>
             </Link>
           )}
         </div>
