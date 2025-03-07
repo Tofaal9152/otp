@@ -11,6 +11,7 @@ import { setIsLogin } from "@/redux/allStateSlice";
 import { useAppDispatch } from "@/redux/hooks";
 import axios from "axios";
 import { Loader } from "lucide-react";
+import Link from "next/link";
 import { useActionState, useEffect, useState } from "react";
 import { toast } from "sonner";
 
@@ -112,7 +113,10 @@ const VerifyOtpPage = () => {
         </Button>
         {state.errors.formError && (
           <div className="bg-red-100 text-red-500 p-2 rounded-lg my-2">
-            {state.errors.formError}
+            {`${state.errors.formError} `}{" "}
+            <Link className="underline underline-offset-4" href="/auth/register">
+              Register here
+            </Link>
           </div>
         )}
 

@@ -13,11 +13,13 @@ export const IsAuthenticatedInDashboard = ({
   const router = useRouter();
   useEffect(() => {
     if (!isLogin) {
-      router.push("/auth/login");
+      router.replace("/auth/login");
     }
   }, [isLogin, router]);
 
-  return <>{children}</> || null;
+  if (!isLogin) return null;
+
+  return <>{children}</>
 };
 
 const IsAuthenticatedInAuth = ({ children }: { children: React.ReactNode }) => {
@@ -25,11 +27,13 @@ const IsAuthenticatedInAuth = ({ children }: { children: React.ReactNode }) => {
   const router = useRouter();
   useEffect(() => {
     if (isLogin) {
-      router.push("/");
+      router.replace("/dashboard");
     }
   }, [isLogin, router]);
 
-  return <>{children}</> || null;
+  if (isLogin) return null;
+
+  return <>{children}</>;
 };
 
 export default IsAuthenticatedInAuth;

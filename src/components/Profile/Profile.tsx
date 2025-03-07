@@ -11,6 +11,7 @@ import {
   selectProfilRefresh,
   setAvailableSms,
   setGetProfile,
+  setIsLogin,
 } from "@/redux/allStateSlice";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { useEffect } from "react";
@@ -22,10 +23,16 @@ const Profile = () => {
   const isLogin = useAppSelector(selectIsLogin);
   const refresh = useAppSelector(selectProfilRefresh);
   useEffect(() => {
-    GetProfile().then((e) => {
-      dispatch(setGetProfile(e));
-      dispatch(setAvailableSms(e?.sms_quota));
-    });
+    GetProfile()
+      .then((e) => {
+        dispatch(setGetProfile(e));
+        dispatch(setAvailableSms(e?.sms_quota));
+      })
+      .catch(() => {
+        dispatch(setGetProfile(null));
+        dispatch(setAvailableSms(0));
+        dispatch(setIsLogin(false));
+      });
   }, [dispatch, refresh, isLogin]);
 
   const user = useAppSelector(selectGetProfile);
