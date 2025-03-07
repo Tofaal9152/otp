@@ -36,7 +36,6 @@ const Profile = () => {
       </PopoverTrigger>
       <PopoverContent>
         {user && <UserButtonPopover user={user} />}
-        
       </PopoverContent>
     </Popover>
   );

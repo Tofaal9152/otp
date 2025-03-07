@@ -6,19 +6,15 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import Link from "next/link"; 
+import Link from "next/link";
 
-type NavItem = {
-  name: string;
-  link: string;
-};
-type MobileNavbarProps = {
-  navItems: NavItem[];
-};
-const MobileNavbar: React.FC<MobileNavbarProps> = ({ navItems }) => {
+const MobileNavbar = ({ navItems }: { navItems: any }) => {
   return (
     <Sheet>
-      <SheetTrigger aria-label="Open menu" className="md:hidden block cursor-pointer">
+      <SheetTrigger
+        aria-label="Open menu"
+        className="md:hidden block cursor-pointer"
+      >
         <svg
           className="w-6 h-6 text-black dark:invert"
           fill="none"
@@ -36,7 +32,7 @@ const MobileNavbar: React.FC<MobileNavbarProps> = ({ navItems }) => {
       </SheetTrigger>
       <SheetContent side="top" className="bg-white dark:bg-gray-800">
         {/* Header & Profile Section */}
-        <div className="flex flex-col items-center space-y-4 py-4">
+        <div className="flex flex-col items-center">
           <SheetHeader className="text-center">
             <SheetTitle>Menu</SheetTitle>
             <SheetDescription className="text-gray-500 dark:text-gray-400">
@@ -46,15 +42,15 @@ const MobileNavbar: React.FC<MobileNavbarProps> = ({ navItems }) => {
         </div>
 
         {/* Nav Items */}
-        <ul className="space-y-4 mt-4 p-4">
-          {navItems.map((item, index) => (
+        <ul className="space-y-4 p-4">
+          {navItems.map((item: any, index: any) => (
             <li key={index}>
               <SheetTrigger asChild>
                 <Link
                   href={item.link}
                   className="flex truncate font-semibold items-center space-x-2 cursor-pointer hover:underline"
                 >
-                  {item.name}
+                  {item.icon} <span>{item.name}</span>
                 </Link>
               </SheetTrigger>
             </li>
@@ -64,4 +60,5 @@ const MobileNavbar: React.FC<MobileNavbarProps> = ({ navItems }) => {
     </Sheet>
   );
 };
+
 export default MobileNavbar;

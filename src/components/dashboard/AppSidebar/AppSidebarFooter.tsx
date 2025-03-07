@@ -19,8 +19,8 @@ export function AppSidebarFooter() {
         <Profile />
         {state === "expanded" && (
           <div className="flex flex-col">
-            <span className="font-medium text-sm">{user.name}</span>
-            <p className="text-xs hover:underline">{user.email}</p>
+            <span className="font-medium text-sm">{user?.name}</span>
+            <p className="text-xs hover:underline">{user?.email}</p>
           </div>
         )}
       </SidebarMenuItem>

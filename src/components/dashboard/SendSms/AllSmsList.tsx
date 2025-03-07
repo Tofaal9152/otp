@@ -54,32 +54,32 @@ const AllSmsListTable = () => {
             </TableRow>
           </TableHeader>
           <TableBody>
-            {allSmsList?.results.length === 0 ? (
+            {allSmsList?.results?.length === 0 ? (
               <TableRow>
                 <TableCell colSpan={5} className="text-center font-medium">
                   No SMS data available
                 </TableCell>
               </TableRow>
             ) : (
-              allSmsList?.results.map((item: any) => (
-                <TableRow key={item.id}>
+              allSmsList?.results?.map((item: any) => (
+                <TableRow key={item?.id}>
                   <TableCell className="font-medium">
-                    {item.recipient}
+                    {item?.recipient}
                   </TableCell>
-                  <TableCell>{truncateMessage(item.message)}</TableCell>
-                  <TableCell>{formatDate(item.created_at)}</TableCell>
-                  <TableCell>{formatDate(item.sent_at)}</TableCell>
+                  <TableCell>{truncateMessage(item?.message)}</TableCell>
+                  <TableCell>{formatDate(item?.created_at)}</TableCell>
+                  <TableCell>{formatDate(item?.sent_at)}</TableCell>
                   <TableCell className="text-center">
                     <Badge
                       className={`${
-                        item.status === "SENT"
+                        item?.status === "SENT"
                           ? "bg-green-500"
                           : item.status === "QUEUED"
                           ? "bg-yellow-500"
                           : "bg-red-500"
                       } text-white`}
                     >
-                      {item.status}
+                      {item?.status}
                     </Badge>
                   </TableCell>
                 </TableRow>
@@ -103,7 +103,7 @@ export default AllSmsListTable;
 
 // Helper functions
 const truncateMessage = (message: string, maxLength: number = 30) => {
-  return message.length > maxLength
+  return message?.length > maxLength
     ? message.substring(0, maxLength) + "..."
     : message;
 };

@@ -94,9 +94,12 @@ const Hero = () => {
                   width={1200}
                   height={800}
                   quality={100}
-                  className="rounded-lg shadow-lg"
+                  className="rounded-lg shadow-lg w-auto h-auto"
                   src="/heroimg.png"
                   alt="heroimgpng"
+                  placeholder="blur"
+                  priority
+                  blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="
                 />
               </div>
             </div>

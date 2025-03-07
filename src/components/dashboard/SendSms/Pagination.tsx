@@ -13,7 +13,7 @@ const Pagination = ({
   return (
     <div className="flex justify-center gap-4 mt-4">
       <Button
-        disabled={allSmsList.previous === null}
+        disabled={allSmsList?.previous === null}
         variant={"outline"}
         size={"sm"}
         onClick={() => setCurrentPage((prev: any) => Math.max(prev - 1, 1))}
@@ -21,10 +21,10 @@ const Pagination = ({
         <ChevronLeft />
       </Button>
       <span className="font-medium">
-        {currentPage} / {Math.ceil(allSmsList.count / 10)}
+        {currentPage} / {Math.ceil(allSmsList?.count / 10)}
       </span>
       <Button
-        disabled={allSmsList.next === null}
+        disabled={allSmsList?.next === null}
         variant={"outline"}
         size={"sm"}
         onClick={() => setCurrentPage((prev: any) => prev + 1)}

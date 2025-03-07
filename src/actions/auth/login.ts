@@ -1,7 +1,6 @@
-// "use server"
-import { redirect } from "next/navigation";
-import { z } from "zod";
 import axios from "axios";
+import { toast } from "sonner";
+import { z } from "zod";
 
 const LoginSchema = z.object({
   email: z.string().email("please enter a valid email"),
@@ -12,7 +11,9 @@ type LoginType = {
     email?: string[];
     password?: string[];
     formError?: string[];
+    verified?: string[];
   };
+  success?: boolean;
 };
 export const LoginAction = async (
   previousState: LoginType,
@@ -41,7 +42,15 @@ export const LoginAction = async (
         withCredentials: true,
       }
     );
-    console.log(res.data);
+    if (res.data.verified == false) {
+      return {
+        errors: {
+          verified: ["Please verify your email"],
+        },
+        success: false,
+      };
+    }
+    toast.success("Log in successful");
   } catch (error) {
     if (error instanceof Error) {
       return {
@@ -60,5 +69,5 @@ export const LoginAction = async (
     }
   }
 
-  redirect("/");
+  return { success: true, errors: {} };
 };

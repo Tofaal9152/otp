@@ -7,15 +7,25 @@ import {
   InputOTPSeparator,
   InputOTPSlot,
 } from "@/components/ui/input-otp";
+import { setIsLogin } from "@/redux/allStateSlice";
+import { useAppDispatch } from "@/redux/hooks";
+import axios from "axios";
 import { Loader } from "lucide-react";
-import { useActionState } from "react";
-import { useState, useEffect } from "react";
+import { useActionState, useEffect, useState } from "react";
+import { toast } from "sonner";
 
 const VerifyOtpPage = () => {
+  const dispatch = useAppDispatch();
+
   const [state, action, isPending] = useActionState(VerifyOtpAction, {
     errors: {},
   });
-
+  // If the OTP is verified successfully, set the isLogin state to true
+  useEffect(() => {
+    if (state.success) {
+      dispatch(setIsLogin(true));
+    }
+  }, [state.success, dispatch]);
   // Timer state for 10 minutes (600 seconds)
   const [timer, setTimer] = useState(600); // Set initial timer value to 600 seconds (10 minutes)
   const [isTimerActive, setIsTimerActive] = useState(true);
@@ -35,10 +45,25 @@ const VerifyOtpPage = () => {
   }, [isTimerActive, timer]);
 
   // Resend OTP handler (you can implement your logic for resending OTP)
-  const handleResendOtp = () => {
+  const handleResendOtp = async (e: any) => {
+    e.preventDefault();
     setIsTimerActive(true); // Restart the timer
     setTimer(600); // Reset the timer to 600 seconds (10 minutes)
     // Your resend OTP logic here
+    try {
+      const res = await axios.post(
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/customer/resend-otp/`,
+        {},
+        {
+          withCredentials: true,
+        }
+      );
+      console.log(res.data);
+      toast.success("Otp sent successfully");
+    } catch (error) {
+      toast.error("Error in resending otp");
+      console.log(error);
+    }
   };
 
   // Convert the timer seconds to minutes and seconds format
@@ -94,7 +119,10 @@ const VerifyOtpPage = () => {
         <div className="mt-4 text-sm text-gray-600 dark:text-gray-400">
           {isTimerActive ? (
             <p>
-              Limit <strong>{minutes}:{seconds < 10 ? `0${seconds}` : seconds}</strong>
+              Limit{" "}
+              <strong>
+                {minutes}:{seconds < 10 ? `0${seconds}` : seconds}
+              </strong>
             </p>
           ) : (
             <Button
