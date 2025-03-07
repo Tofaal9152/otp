@@ -6,9 +6,13 @@ import Link from "next/link";
 import { Button } from "../ui/button";
 import { ModeToggle2 } from "../ui/ModeToggle2";
 import MobileNavbar from "./MobileNavar";
+import Image from "next/image";
 
 const Navbar = () => {
   const isLogin = useAppSelector(selectIsLogin);
+  console.log("====================================");
+  console.log(isLogin);
+  console.log("====================================");
   const navItems = [
     { name: "Home", link: "/" },
     {
@@ -18,15 +22,12 @@ const Navbar = () => {
     ...(isLogin ? [{ name: "Dashboard", link: "/dashboard" }] : []),
   ];
   return (
-    <nav className="z-50 bg-opacity-30 backdrop-blur-lg sticky top-0 p-4 border-b dark:bg-gray-900/50">
+    <nav className="z-50 bg-opacity-30 backdrop-blur-lg sticky top-0 p-4 border-b bg-gray-50 dark:bg-gray-800 dark:border-gray-700 transition-colors">
       <div className="container mx-auto flex items-center justify-between lg:px-8">
         {/* Logo */}
         <MobileNavbar navItems={navItems} />
-        <Link
-          href="/"
-          className="font-bold text-3xl cursor-pointer bg-gradient-to-r transition-all duration-300"
-        >
-          Cloud Sms BD
+        <Link href="/">
+          <Image src="/logo.jpg" alt="logo" className="rounded-full border-2 border-sky-500" width={50} height={50} />
         </Link>
 
         {/* Desktop Nav Items */}

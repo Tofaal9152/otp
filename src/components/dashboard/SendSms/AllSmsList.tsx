@@ -25,7 +25,6 @@ const AllSmsListTable = () => {
   const dispatch = useAppDispatch();
   const refresh = useAppSelector(selectSendSmsRefresh);
   const allSmsList = useAppSelector(selectAllSmsList);
-
   const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
@@ -73,7 +72,11 @@ const AllSmsListTable = () => {
                   <TableCell className="text-center">
                     <Badge
                       className={`${
-                        item.status === "SENT" ? "bg-green-500" : item.status === "QUEUED" ? "bg-yellow-500" : "bg-red-500"
+                        item.status === "SENT"
+                          ? "bg-green-500"
+                          : item.status === "QUEUED"
+                          ? "bg-yellow-500"
+                          : "bg-red-500"
                       } text-white`}
                     >
                       {item.status}

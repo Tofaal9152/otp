@@ -1,6 +1,7 @@
 "use client";
 import AnalyticsCard from "@/components/dashboard/analytics/AnalyticsCard";
 import PieChartComponent from "@/components/dashboard/analytics/PieChart";
+import AllSmsListTable from "@/components/dashboard/SendSms/AllSmsList";
 import { selectAvailableSms, selectSentSms } from "@/redux/allStateSlice";
 import { useAppSelector } from "@/redux/hooks";
 const OverviewPage = () => {
@@ -28,6 +29,10 @@ const OverviewPage = () => {
       <PieChartComponent analyticsData={analyticsData} />
       {/* Analytics Cards */}
       <AnalyticsCard analyticsData={analyticsData} />
+      {/* Recent Sms */}
+      <div className="mt-4">
+        <AllSmsListTable />
+      </div>
     </div>
   );
 };

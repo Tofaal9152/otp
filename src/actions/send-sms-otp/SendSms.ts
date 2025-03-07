@@ -24,28 +24,24 @@ export const SendSmsAction = async (
     recipient: formData.get("recipient"),
   });
   // console.log(result);
-
   if (!result.success) {
     return {
       errors: result.error.flatten().fieldErrors,
     };
   }
-  const payload = {
-    message: formData.get("message"),
-    ...(isBulk
-      ? {
-          recipients: (formData.get("recipient") as string)
-            .split(",")
-            .map((num) => num.trim()),
-        }
-      : { recipient: formData.get("recipient") }),
-  };
 
+  // URL
+  const URL = isBulk
+    ? `${process.env.NEXT_PUBLIC_BACKEND_URL}/forwarder/send/?type=bulk`
+    : `${process.env.NEXT_PUBLIC_BACKEND_URL}/forwarder/send/`;
   try {
     const res = await axios.post(
-      `${process.env.NEXT_PUBLIC_BACKEND_URL}/forwarder/send/}`,
+      URL,
       {
-        payload,
+        message: formData.get("message"),
+        [isBulk ? "recipients" : "recipient"]: isBulk
+          ? (formData.get("recipient") as string).split(",")
+          : formData.get("recipient"),
       },
       {
         withCredentials: true,

@@ -16,8 +16,10 @@ const LoginPage = () => {
     errors: {},
   });
   useEffect(() => {
-    dispatch(setIsLogin(true));
-  }, [dispatch]);
+    if (isPending) {
+      dispatch(setIsLogin(true));
+    }
+  }, [dispatch, isPending]);
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}

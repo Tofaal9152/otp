@@ -1,14 +1,14 @@
 "use client";
-import Link from "next/link";
-import { Button } from "../ui/button";
 import { selectIsLogin } from "@/redux/allStateSlice";
 import { useAppSelector } from "@/redux/hooks";
+import Image from "next/image";
+import Link from "next/link";
 
 const Hero = () => {
   const isLogin = useAppSelector(selectIsLogin);
-  console.log('====================================');
+  console.log("====================================");
   console.log(isLogin);
-  console.log('====================================');
+  console.log("====================================");
   return (
     <div className="relative isolate overflow-hidden bg-white dark:bg-gray-900 transition-colors">
       <div className="absolute inset-0 -z-10 bg-[radial-gradient(45rem_50rem_at_top,var(--color-indigo-100),white)] opacity-20 dark:bg-[radial-gradient(45rem_50rem_at_top,var(--color-indigo-800),white)]"></div>
@@ -35,15 +35,46 @@ const Hero = () => {
             Secure, fast, and cost-effective OTP solutions for your business.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center mt-9 space-y-4 sm:space-y-0 sm:space-x-5">
-            <Link href={`${isLogin ? "/dashboard/api-tokens" : "/auth/signup"}`}>
-              <Button variant={"default"}>
-                {isLogin ? "Get Api Token" : "Sign Up Now!"}
-              </Button>
+            <Link
+              href={`${isLogin ? "/dashboard/api-tokens" : "/auth/register"}`}
+            >
+              {/*  */}
+              <button className="px-8 py-2 rounded-full relative bg-slate-700 text-white text-sm hover:shadow-2xl hover:shadow-white/[0.1] transition duration-200 border border-slate-600">
+                <div className="absolute inset-x-0 h-px w-1/2 mx-auto -top-px shadow-2xl  bg-gradient-to-r from-transparent via-teal-500 to-transparent" />
+                <span className="relative z-20">
+                  {" "}
+                  {isLogin ? "Get Api Token" : "Sign Up Now!"}
+                </span>
+              </button>
             </Link>
-            <Link href={`${isLogin ? "/dashboard/send-sms-otp" : "/documentation"}`}>
-              <Button variant={"outline"}>{
-                isLogin ? "Send SMS or OTP!" : "Documentation"
-                }</Button>
+            <Link
+              href={`${isLogin ? "/dashboard/send-sms-otp" : "/documentation"}`}
+            >
+              {/*  */}
+              <button className="bg-slate-800 no-underline group cursor-pointer relative shadow-2xl shadow-zinc-900 rounded-full p-px text-sm font-semibold leading-6  text-white inline-block">
+                <span className="absolute inset-0 overflow-hidden rounded-full">
+                  <span className="absolute inset-0 rounded-full bg-[image:radial-gradient(75%_100%_at_50%_0%,rgba(56,189,248,0.6)_0%,rgba(56,189,248,0)_75%)] opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+                </span>
+                <div className="relative flex space-x-2 items-center z-10 rounded-full bg-zinc-950 py-2 px-8 ring-1 ring-white/10 ">
+                  <span>{isLogin ? "Send SMS or OTP!" : "Documentation"}</span>
+                  <svg
+                    fill="none"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    width="16"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M10.75 8.75L14.25 12L10.75 15.25"
+                      stroke="currentColor"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="1.5"
+                    />
+                  </svg>
+                </div>
+                <span className="absolute -bottom-0 left-[1.125rem] h-px w-[calc(100%-2.25rem)] bg-gradient-to-r from-emerald-400/0 via-emerald-400/90 to-emerald-400/0 transition-opacity duration-500 group-hover:opacity-40" />
+              </button>
             </Link>
           </div>
           <p className="mt-8 text-base text-gray-500 dark:text-gray-400">
@@ -59,13 +90,14 @@ const Hero = () => {
 
               {/* Image with border inside gradient */}
               <div className="relative bg-white dark:bg-gray-900 rounded-lg overflow-hidden">
-                {/* <Image
+                <Image
                   width={1200}
                   height={800}
+                  quality={100}
                   className="rounded-lg shadow-lg"
-                  src="/heroimage.png"
-                  alt="heroimage"
-                /> */}
+                  src="/heroimg.png"
+                  alt="heroimgpng"
+                />
               </div>
             </div>
           </div>

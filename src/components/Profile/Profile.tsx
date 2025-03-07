@@ -24,7 +24,7 @@ const Profile = () => {
   useEffect(() => {
     GetProfile().then((e) => {
       dispatch(setGetProfile(e));
-      dispatch(setAvailableSms(e.sms_quota));
+      dispatch(setAvailableSms(e?.sms_quota));
     });
   }, [dispatch, refresh, isLogin]);
 

@@ -1,9 +1,9 @@
 "use client";
-// import IsAuthenticatedInAuth from "@/hooks/isAuthenticated";
+import IsAuthenticatedInAuth from "@/hooks/isAuthenticated";
 export default function DashboardLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  return <>{children}</>;
+  return <IsAuthenticatedInAuth>{children}</IsAuthenticatedInAuth>;
 }

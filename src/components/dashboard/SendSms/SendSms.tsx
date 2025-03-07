@@ -21,17 +21,16 @@ const SendSMS = () => {
     }
   );
   useEffect(() => {
-    if (isPending) {
+    if (isPending && state) {
       dispatch(setSendSmsRefresh());
     }
-  }, [isPending, dispatch]);
+  }, [isPending, dispatch, state]);
   return (
     <section className="flex container mx-auto flex-col items-center justify-center p-4">
       <div className="max-w-3xl w-full bg-white dark:bg-gray-900 p-6 rounded-xl shadow-lg">
         <h2 className="text-2xl font-semibold text-center mb-6 text-gray-800 dark:text-white">
           Send SMS or OTP
         </h2>
-
         <form action={action}>
           <div className="flex items-center justify-between mb-6 border-b pb-4">
             <Label className="text-gray-700 dark:text-gray-300">
@@ -58,7 +57,6 @@ const SendSMS = () => {
               {state.errors.message}
             </div>
           )}
-
           {/* Recipient Input */}
           <div className="mb-4">
             <Label className="block text-sm font-medium mb-1 text-gray-700 dark:text-gray-300">
